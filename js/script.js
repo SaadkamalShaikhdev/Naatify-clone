@@ -33,7 +33,7 @@ console.log("Checking");
 
 
 async function getAudios(folder) {
-    let a = await fetch(`http://127.0.0.1:3000${folder}/`)
+    let a = await fetch(`${folder}/`)
     currfolder =folder;
     let response = await a.text();
     let div = document.createElement("div");
@@ -88,7 +88,7 @@ const playAudio=(track,info,pause =false)=>{
     let artist =info.replaceAll(" ","%20")
     // console.log(info);
     
-    let newtrack=`http://127.0.0.1:3000/${currfolder}/${track}%20-%20${artist}.mp3`.replaceAll(" ","")
+    let newtrack=`${currfolder}/${track}%20-%20${artist}.mp3`.replaceAll(" ","")
 currentAudio.src =newtrack
 if(!pause){
     currentAudio.play()
@@ -98,7 +98,7 @@ document.querySelector(".audioinfo").innerHTML = track
 document.querySelector(".audiotime").innerHTML = "00:00 / 00:00"
 }
 async function displayalbums() {
-   let a = await fetch(`http://127.0.0.1:3000/audio/`)
+   let a = await fetch(`/audio/`)
     let response = await a.text();
     // console.log(response);
     let div = document.createElement("div");
@@ -113,7 +113,7 @@ for (let index = 0; index < array.length; index++) {
 
       if(e.href.includes("%5Caudio%5")){
        let folder =e.href.split("%5C").slice(-1)[0].slice(0,-1);
-      let a = await fetch(`http://127.0.0.1:3000/audio/${folder}/info.json`)
+      let a = await fetch(`/audio/${folder}/info.json`)
       let response = await a.json();
         console.log(response);
         cardContainer.innerHTML = cardContainer.innerHTML +`<div data-folder="${folder}" class="card">
